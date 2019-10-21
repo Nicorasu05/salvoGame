@@ -1,13 +1,31 @@
 package com.codeoftheweb.salvo;
 
+import com.codeoftheweb.salvo.models.Player;
+import com.codeoftheweb.salvo.repositories.PlayerRepository;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
 public class SalvoApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(SalvoApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(SalvoApplication.class, args);
+        System.out.println("Hola");
+    }
 
+    @Bean
+    public CommandLineRunner initData(PlayerRepository playerRepository) {
+        return (args) -> {
+            // save a couple of players
+            Player player1 = new Player("nico@gmail.com");
+            playerRepository.save(player1);
+
+            Player player2 = new Player("pepe@gmail.com");
+            playerRepository.save(player2);
+
+        };
+    }
 }
+
