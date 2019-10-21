@@ -14,6 +14,7 @@ public class Player {
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
     @GenericGenerator(name = "native", strategy = "native")
     private long id;
+
     private String userName;
 
     public Player() { }
@@ -29,8 +30,9 @@ public class Player {
     public void setUserName(String userName) {
         this.userName = userName;
     }
-
-    public String toString() {
-        return userName;
+    public long getId(){
+        return id;
     }
+
+
 }
