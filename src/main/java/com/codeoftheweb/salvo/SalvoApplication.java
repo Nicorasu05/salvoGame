@@ -1,7 +1,9 @@
 package com.codeoftheweb.salvo;
 
 import com.codeoftheweb.salvo.models.Game;
+import com.codeoftheweb.salvo.models.GamePlayer;
 import com.codeoftheweb.salvo.models.Player;
+import com.codeoftheweb.salvo.repositories.GamePlayerRepository;
 import com.codeoftheweb.salvo.repositories.GameRepository;
 import com.codeoftheweb.salvo.repositories.PlayerRepository;
 import org.springframework.boot.CommandLineRunner;
@@ -18,7 +20,7 @@ public class SalvoApplication {
     }
 
     @Bean
-    public CommandLineRunner initData(PlayerRepository playerRepository, GameRepository gameRepository) {
+    public CommandLineRunner initData(PlayerRepository playerRepository, GameRepository gameRepository, GamePlayerRepository gamePlayerRepository) {
         return (args) -> {
             // save a couple of players
             Player player1 = new Player("nico@gmail.com");
@@ -35,6 +37,12 @@ public class SalvoApplication {
 
             Game game3 = new Game();
             gameRepository.save(game3);
+
+            GamePlayer gamePlayer1 = new GamePlayer(player1, game1);
+            GamePlayer gamePlayer2 = new GamePlayer(player2, game1);
+
+            gamePlayerRepository.save(gamePlayer1);
+            gamePlayerRepository.save(gamePlayer2);
 
         };
     }
