@@ -4,6 +4,8 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 
 @Entity //Crear una tabla persona para esta clase
@@ -57,6 +59,12 @@ public class GamePlayer {
 
     public void setJoinDate() { this.joinDate = joinDate;}
 
-
+    public Map<String, Object> getGamePlayerData () {
+        Map<String, Object> gamePlayerData = new HashMap<>();
+        gamePlayerData.put("id", this.id);
+        gamePlayerData.put("date", this.joinDate);
+        gamePlayerData.put("player", this.player.getPlayerData());
+        return gamePlayerData;
+    }
 
 }
