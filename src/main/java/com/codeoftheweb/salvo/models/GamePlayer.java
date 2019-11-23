@@ -15,6 +15,10 @@ public class GamePlayer {
     private long id;
     private Date joinDate;
 
+    public Set<Salvo> getSalvoes() {
+        return salvoes;
+    }
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "playerID")
     private Player player;
@@ -25,6 +29,9 @@ public class GamePlayer {
 
     @OneToMany(mappedBy = "gamePlayer", fetch = FetchType.EAGER)
     Set<Ship> ships;
+
+    @OneToMany(mappedBy = "gamePlayer", fetch = FetchType.EAGER)
+    private Set<Salvo> salvoes;
 
     public Set<Ship> getShips() {
         return ships;
