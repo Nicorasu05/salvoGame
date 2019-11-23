@@ -5,14 +5,14 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 @Entity //Crear una tabla persona para esta clase
 public class Player {
 
     @OneToMany(mappedBy = "player", fetch = FetchType.EAGER)
-    List<GamePlayer> gamePlayers;
+    Set<GamePlayer> gamePlayers;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
@@ -38,10 +38,14 @@ public class Player {
         return id;
     }
 
+    public Set<GamePlayer> getGamePlayers() {
+        return gamePlayers;
+    }
+
     public Map<String, Object> getPlayerData() {
         Map<String, Object> playerData = new HashMap<>();
-        playerData.put("id", this.id);
-        playerData.put("user", this.userName);
+        playerData.put("id", this.getId());
+        playerData.put("user", this.getUserName());
         return playerData;
     }
 

@@ -63,9 +63,9 @@ public class Ship {
 
     public Map<String, Object> getShipData () {
         Map<String, Object> shipData = new HashMap<>();
-        shipData.put("id", this.id);
-        shipData.put("shipType", this.shipType);
-        shipData.put("location", this.locations);
+        //shipData.put("id", this.getId());
+        shipData.put("types", this.getShipType());
+        shipData.put("locations", this.getLocations());
         return shipData;
     }
 }

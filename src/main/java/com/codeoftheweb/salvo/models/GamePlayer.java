@@ -3,10 +3,7 @@ package com.codeoftheweb.salvo.models;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
 @Entity //Crear una tabla persona para esta clase
@@ -27,13 +24,13 @@ public class GamePlayer {
     private Game game;
 
     @OneToMany(mappedBy = "gamePlayer", fetch = FetchType.EAGER)
-    List<Ship> ships;
+    Set<Ship> ships;
 
-    public List<Ship> getShips() {
+    public Set<Ship> getShips() {
         return ships;
     }
 
-    public void setShips(List<Ship> ships) {
+    public void setShips(Set<Ship> ships) {
         this.ships = ships;
     }
 
@@ -73,9 +70,9 @@ public class GamePlayer {
 
     public Map<String, Object> getGamePlayerData () {
         Map<String, Object> gamePlayerData = new HashMap<>();
-        gamePlayerData.put("id", this.id);
-        gamePlayerData.put("date", this.joinDate);
-        gamePlayerData.put("player", this.player.getPlayerData());
+        gamePlayerData.put("id", this.getId());
+        gamePlayerData.put("date", this.getJoinDate());
+        gamePlayerData.put("player", this.getPlayer().getPlayerData());
         return gamePlayerData;
     }
 

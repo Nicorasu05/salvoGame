@@ -18,14 +18,14 @@ public class Game {
     private Date creationDate;
 
     @OneToMany(mappedBy = "game", fetch = FetchType.EAGER)
-    List<GamePlayer> gamePlayers;
+    private Set<GamePlayer> gamePlayers;
 
     public Game() {
-        this.creationDate = new Date();this.gamePlayers = new ArrayList<>();
+        this.creationDate = new Date();
     }
 
     public Game(Date creationDate) {
-        this.creationDate = creationDate;this.gamePlayers = new ArrayList<>();
+        this.creationDate = creationDate;
     }
 
     public Date getCreationDate() {
@@ -38,14 +38,18 @@ public class Game {
         return id;
     }
 
+    public Set<GamePlayer> getGamePlayers() {
+        return gamePlayers;
+    }
+
     public Map<String, Object> getJson () {
         Map<String, Object> json = new HashMap<>();
 
-        json.put("id", this.id);
-        json.put("date", this.creationDate);
-        json.put("gamePlayers", this.gamePlayers.stream()
-                                                .map(gamePlayer -> gamePlayer.getGamePlayerData())
-                                                .collect(Collectors.toList()));
+        json.put("id", this.getId());
+        json.put("date", this.getCreationDate());
+        json.put("gamePlayers", this.getGamePlayers().stream()
+                                                    .map(gamePlayer -> gamePlayer.getGamePlayerData())
+                                                    .collect(Collectors.toList()));
 
         return json;
     }
