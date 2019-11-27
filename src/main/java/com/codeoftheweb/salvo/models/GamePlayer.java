@@ -16,6 +16,7 @@ public class GamePlayer {
     private Date joinDate;
 
     public Set<Salvo> getSalvoes() {
+
         return salvoes;
     }
 
@@ -28,10 +29,10 @@ public class GamePlayer {
     private Game game;
 
     @OneToMany(mappedBy = "gamePlayer", fetch = FetchType.EAGER)
-    Set<Ship> ships;
+    private Set<Ship> ships;
 
     @OneToMany(mappedBy = "gamePlayer", fetch = FetchType.EAGER)
-    private Set<Salvo> salvoes;
+    Set<Salvo> salvoes;
 
     public Set<Ship> getShips() {
         return ships;
@@ -82,5 +83,4 @@ public class GamePlayer {
         gamePlayerData.put("player", this.getPlayer().getPlayerData());
         return gamePlayerData;
     }
-
 }

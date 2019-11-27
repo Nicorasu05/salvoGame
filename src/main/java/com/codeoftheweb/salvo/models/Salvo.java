@@ -3,9 +3,7 @@ package com.codeoftheweb.salvo.models;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 public class Salvo {
@@ -20,6 +18,34 @@ public class Salvo {
 
     private int turn;
 
+    public long getId() {
+        return id;
+    }
+
+    public GamePlayer getGamePlayer() {
+        return gamePlayer;
+    }
+
+    public void setGamePlayer(GamePlayer gamePlayer) {
+        this.gamePlayer = gamePlayer;
+    }
+
+    public int getTurn() {
+        return turn;
+    }
+
+    public void setTurn(int turn) {
+        this.turn = turn;
+    }
+
+    public List<String> getLocations() {
+        return locations;
+    }
+
+    public void setLocations(List<String> locations) {
+        this.locations = locations;
+    }
+
     public Salvo() {
     }
 
@@ -33,5 +59,12 @@ public class Salvo {
     @Column(name="locations")
     private List<String> locations = new ArrayList<>();
 
+    public Map<String, Object> getSalvoData () {
+        Map<String, Object> salvoData = new HashMap<>();
+        salvoData.put("turn", this.getTurn());
+        salvoData.put("player", this.getGamePlayer().getId());
+        salvoData.put("locations", this.getLocations());
+        return salvoData;
+    }
 
     }

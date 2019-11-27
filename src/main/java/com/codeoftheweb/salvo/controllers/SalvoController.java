@@ -53,9 +53,9 @@ public class SalvoController {
         Map<String, Object> gameViewDTO = new HashMap<>();
         gameViewDTO.put("id", gamePlayer.getGame().getId());
         gameViewDTO.put("created", gamePlayer.getGame().getCreationDate());
-        gameViewDTO.put("gamePlayers", gamePlayer.getGame().getGamePlayers().stream().map(gp -> gp.getGamePlayerData()));
-        gameViewDTO.put("ships", gamePlayer.getShips().stream().map (ship -> ship.getShipData())
-                .collect(Collectors.toList()));
+        gameViewDTO.put("gamePlayers", gamePlayer.getGame().getGamePlayers().stream().map(gp -> gp.getGamePlayerData()).collect(Collectors.toList()));
+        gameViewDTO.put("ships", gamePlayer.getShips().stream().map (ship -> ship.getShipData()).collect(Collectors.toList()));
+        gameViewDTO.put("salvoes", gamePlayer.getGame().getGamePlayers().stream().flatMap(gp -> gp.getSalvoes().stream().map(salvo -> salvo.getSalvoData())).collect(Collectors.toList()));
 
 return gameViewDTO ;
     }
